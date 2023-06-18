@@ -20,6 +20,9 @@ pages_list = [
 
 
 class Crypto:
+    def __init__(self):
+        self.symbol_list, self.dollar_price_list, self.rial_price_list, self.marketcap_list, self.trade_volume_list = [], [], [], [], []
+
     def get_crypto_currency(self, value=1):
         numbers = range(0, value)
         # Getting current time (momentary year, month, day, etc).
@@ -51,18 +54,33 @@ class Crypto:
                     names_span = n.find_all('span')
                     for ns in names_span:
                         print(bcolors.HEADER + bcolors.BOLD + ns.text, end=" --> " + bcolors.ENDC)
+                    # Creating target lists ("symbol_list") for inserting our data to mysql database.
+                    for ns in names_span:
+                        self.symbol_list.append(ns.text)
                 # Dollar prices.
                 for dp in dollar_prices:
                     print(bcolors.OKBLUE + dollar_price_title.text + ": " + dp.text, end=" | " + bcolors.ENDC)
+                # Creating target lists ("dollar_price_list") for inserting our data to mysql database.
+                for dp in dollar_prices:
+                    self.dollar_price_list.append(dp.text)
                 # Rial prices.
                 for rp in rial_prices:
                     prices_span = rp.find_all('span')
                     for ps in prices_span[1]:
                         print(bcolors.FAIL + rial_price_title.text + ": " + ps.text + " تومان", end=" | " + bcolors.ENDC)
+                    # Creating target lists ("rial_price_list") for inserting our data to mysql database.
+                    for ps in prices_span[1]:
+                        self.rial_price_list.append(ps.text + " ریال")
                 # Market cap.
                 for m in market_cap:
                     print(bcolors.OKGREEN + market_cap_title.text + ": " + m.text, end=" | " + bcolors.ENDC)
+                # Creating target lists ("rial_price_list") for inserting our data to mysql database.
+                for m in market_cap:
+                    self.marketcap_list.append(m.text)
                 # Daily trading volume.
                 for v in volume:
                     print(bcolors.OKGREEN + volume_title.text + ": " + v.text + "\n" + bcolors.ENDC +
                           " |" + ' تاریخ:' + date[:16])
+                    # Creating target lists ("rial_price_list") for inserting our data to mysql database.
+                for v in volume:
+                    self.trade_volume_list.append(v.text)
