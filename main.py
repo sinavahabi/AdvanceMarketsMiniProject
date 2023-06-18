@@ -131,6 +131,7 @@ def running():
         if user_input1 == 4:
             local_obj.get_currencies()
             local_obj.currencies_database()
+            local_obj.currency_symbol_list, local_obj.currency_price_list = [], []
 
     # If user chose Tehran Stock Exchange market option.
     if user_input == 2:
@@ -284,6 +285,7 @@ def running():
         if user_input2 == 3:
             bourse_obj.get_indicators()
             bourse_obj.database_index()
+            bourse_obj.index_symbol_list, bourse_obj.index_amount_list = [], []
 
     # If user chose Crypto Currency market option.
     if user_input == 3:
