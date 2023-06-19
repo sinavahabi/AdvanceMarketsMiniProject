@@ -25,6 +25,7 @@ Bourse and Fara-bourse data ordering list:
 {without ordering, ordering by market value, ordering by final price, ordering by final trade, ordering by trade volume, 
 ordering by trade value}
 """
+
 bourse_urls = [
     "https://www.shakhesban.com/markets/stock?flow=1",
     "https://www.shakhesban.com/markets/stock?flow=1&sort=20&sort_type=desc",
@@ -33,6 +34,7 @@ bourse_urls = [
     "https://www.shakhesban.com/markets/stock?flow=1&sort=5&sort_type=desc",
     "https://www.shakhesban.com/markets/stock?flow=1&sort=6&sort_type=desc"
 ]
+
 fara_bourse_urls = [
     "https://www.shakhesban.com/markets/stock?flow=2",
     "https://www.shakhesban.com/markets/stock?flow=2&sort=20&sort_type=desc",
@@ -41,6 +43,7 @@ fara_bourse_urls = [
     "https://www.shakhesban.com/markets/stock?flow=2&sort=5&sort_type=desc",
     "https://www.shakhesban.com/markets/stock?flow=2&sort=6&sort_type=desc"
 ]
+
 run = True
 
 
@@ -70,10 +73,12 @@ def running():
             # If user intend to go back from 'Crypto Currency' market menu.
             if user_input3 == 5:
                 continue
+            # If user choice is not an available index number between options.
             if user_input > 3:
                 print(bcolors.FAIL + "Please Either choose number 1, 2 or 3. You can also choose '0'"
                                      " to exit" + bcolors.ENDC)
                 continue
+            # If user choice is not an available index number between options.
             if user_input < 0:
                 print(bcolors.FAIL + "Please Either choose number 1, 2 or 3. You can also choose '0'"
                                      " to exit" + bcolors.ENDC)
@@ -99,10 +104,12 @@ def running():
                 if user_input1 == 0:
                     print(bcolors.WARNING + "GOODBYE." + bcolors.ENDC)
                     run = False
+                # If user choice is not an available index number between options.
                 if user_input1 > 5:
                     print(bcolors.FAIL + "Please Either choose number 1, 2, 3 or 4. You can also choose '0' to exit or"
                                          " type '5' in order to go back through menu" + bcolors.ENDC)
                     continue
+                # If user choice is not an available index number between options.
                 if user_input1 < 0:
                     print(bcolors.FAIL + "Please Either choose number 1, 2, 3 or 4. You can also choose '0' to exit or"
                                          " type '5' in order to go back through menu" + bcolors.ENDC)
@@ -120,14 +127,18 @@ def running():
                 local_obj.symbol_list, local_obj.price_list = [], []
             else:
                 print(bcolors.FAIL + bcolors.BOLD + "An error occurred!" + bcolors.ENDC)
+
         # If user chose 'International Ounces price' option.
         if user_input1 == 2:
             local_obj.get_ounce()
+            # In all modules "req_error" default value is set to True, but if program receives a response error after a request, then program will go "else" statement.
             if local_obj.req_error:
                 local_obj.data_database()
+                # In all classes these class objects has been instantiated and their previous values will be cleared and set to empty when their method task is done.
                 local_obj.symbol_list, local_obj.price_list = [], []
             else:
                 print(bcolors.FAIL + bcolors.BOLD + "An error occurred!" + bcolors.ENDC)
+
         # If user chose 'Gold Coin price' option.
         if user_input1 == 3:
             local_obj.get_gold_coin()
@@ -136,6 +147,7 @@ def running():
                 local_obj.symbol_list, local_obj.price_list = [], []
             else:
                 print(bcolors.FAIL + bcolors.BOLD + "An error occurred!" + bcolors.ENDC)
+
         # If user chose 'International Currencies price' option.
         if user_input1 == 4:
             local_obj.get_currencies()
@@ -144,6 +156,7 @@ def running():
                 local_obj.currency_symbol_list, local_obj.currency_price_list = [], []
             else:
                 print(bcolors.FAIL + bcolors.BOLD + "An error occurred!" + bcolors.ENDC)
+
     # If user chose Tehran Stock Exchange market option.
     if user_input == 2:
         print(bcolors.OKBLUE + bcolors.BOLD + "1: Bourse." + bcolors.ENDC)
@@ -158,10 +171,12 @@ def running():
                 if user_input2 == 0:
                     print(bcolors.WARNING + "GOODBYE." + bcolors.ENDC)
                     run = False
+                # If user choice is not an available index number between options.
                 if user_input2 > 4:
                     print(bcolors.FAIL + "Please Either choose number 1, 2 or 3 You can also choose '0' to exit or"
                                          " type '4' in order to go back through menu" + bcolors.ENDC)
                     continue
+                # If user choice is not an available index number between options.
                 if user_input2 < 0:
                     print(bcolors.FAIL + "Please Either choose number 1, 2 or 3 You can also choose '0' to exit or"
                                          " type '4' in order to go back through menu" + bcolors.ENDC)
@@ -188,10 +203,12 @@ def running():
                     if user_input_bourse == 0:
                         print(bcolors.WARNING + "GOODBYE." + bcolors.ENDC)
                         run = False
+                    # If user choice is not an available index number between options.
                     if user_input_bourse > 7:
                         print(bcolors.FAIL + "Please Either choose number between 1 to 6. You can also choose '0'"
                                              " to exit or type '7' in order to go back through menu" + bcolors.ENDC)
                         continue
+                    # If user choice is not an available index number between options.
                     if user_input_bourse < 0:
                         print(bcolors.FAIL + "Please Either choose number between 1 to 6. You can also choose '0'"
                                              " to exit or type '7' in order to go back through menu" + bcolors.ENDC)
@@ -200,6 +217,7 @@ def running():
                     print(bcolors.FAIL + 'You can only enter an integer number.' + bcolors.ENDC)
                     continue
                 break
+
             # If user chose 'Without Ordering' option in 'Bourse'.
             if user_input_bourse == 1:
                 bourse_obj.get_stock_exchange_data(bourse_urls[0])
@@ -208,6 +226,7 @@ def running():
                     bourse_obj.symbol_list, bourse_obj.final_price_list, bourse_obj.trade_price_list, bourse_obj.trade_value_list, bourse_obj.trade_volume_list, bourse_obj.marketcap_list = [], [], [], [], [], []
                 else:
                     print(bcolors.FAIL + bcolors.BOLD + "An error occurred!" + bcolors.ENDC)
+
             # If user chose 'Ordering by Market Value' option in 'Bourse'.
             if user_input_bourse == 2:
                 bourse_obj.get_stock_exchange_data(bourse_urls[1])
@@ -216,6 +235,7 @@ def running():
                     bourse_obj.symbol_list, bourse_obj.final_price_list, bourse_obj.trade_price_list, bourse_obj.trade_value_list, bourse_obj.trade_volume_list, bourse_obj.marketcap_list = [], [], [], [], [], []
                 else:
                     print(bcolors.FAIL + bcolors.BOLD + "An error occurred!" + bcolors.ENDC)
+
             # If user chose 'Ordering by Final Price' option in 'Bourse'.
             if user_input_bourse == 3:
                 bourse_obj.get_stock_exchange_data(bourse_urls[2])
@@ -224,6 +244,7 @@ def running():
                     bourse_obj.symbol_list, bourse_obj.final_price_list, bourse_obj.trade_price_list, bourse_obj.trade_value_list, bourse_obj.trade_volume_list, bourse_obj.marketcap_list = [], [], [], [], [], []
                 else:
                     print(bcolors.FAIL + bcolors.BOLD + "An error occurred!" + bcolors.ENDC)
+
             # If user chose 'Ordering by Final Trade' option in 'Bourse'.
             if user_input_bourse == 4:
                 bourse_obj.get_stock_exchange_data(bourse_urls[3])
@@ -232,6 +253,7 @@ def running():
                     bourse_obj.symbol_list, bourse_obj.final_price_list, bourse_obj.trade_price_list, bourse_obj.trade_value_list, bourse_obj.trade_volume_list, bourse_obj.marketcap_list = [], [], [], [], [], []
                 else:
                     print(bcolors.FAIL + bcolors.BOLD + "An error occurred!" + bcolors.ENDC)
+
             # If user chose 'Ordering by Trade Volume' option in 'Bourse'.
             if user_input_bourse == 5:
                 bourse_obj.get_stock_exchange_data(bourse_urls[4])
@@ -240,6 +262,7 @@ def running():
                     bourse_obj.symbol_list, bourse_obj.final_price_list, bourse_obj.trade_price_list, bourse_obj.trade_value_list, bourse_obj.trade_volume_list, bourse_obj.marketcap_list = [], [], [], [], [], []
                 else:
                     print(bcolors.FAIL + bcolors.BOLD + "An error occurred!" + bcolors.ENDC)
+
             # If user chose 'Ordering by Trade Value' option in 'Bourse'.
             if user_input_bourse == 6:
                 bourse_obj.get_stock_exchange_data(bourse_urls[5])
@@ -257,7 +280,7 @@ def running():
             print(bcolors.OKGREEN + "4.Ordering by Final Trade:" + bcolors.ENDC)
             print(bcolors.OKGREEN + "5.Ordering by Trade Volume:" + bcolors.ENDC)
             print(bcolors.OKGREEN + "6.Ordering by Trade Value:" + bcolors.ENDC)
-            print(bcolors.OKGREEN + "7.Type '7' to go back through menu." + bcolors.ENDC)
+            print(bcolors.WARNING + "7.Type '7' to go back through menu." + bcolors.ENDC)
             print(bcolors.FAIL + "'Type 0 number to exit.'" + bcolors.ENDC)
             while True:
                 try:
@@ -266,10 +289,12 @@ def running():
                     if user_input_fara_bourse == 0:
                         print(bcolors.WARNING + "GOODBYE." + bcolors.ENDC)
                         run = False
+                    # If user choice is not an available index number between options.
                     if user_input_fara_bourse > 7:
                         print(bcolors.FAIL + "Please Either choose number between 1 to 6. You can also choose '0'"
                                              " to exit or type '7' in order to go back through menu" + bcolors.ENDC)
                         continue
+                    # If user choice is not an available index number between options.
                     if user_input_fara_bourse < 0:
                         print(bcolors.FAIL + "Please Either choose number between 1 to 6. You can also choose '0'"
                                              " to exit or type '7' in order to go back through menu" + bcolors.ENDC)
@@ -287,6 +312,7 @@ def running():
                     bourse_obj.symbol_list, bourse_obj.final_price_list, bourse_obj.trade_price_list, bourse_obj.trade_value_list, bourse_obj.trade_volume_list, bourse_obj.marketcap_list = [], [], [], [], [], []
                 else:
                     print(bcolors.FAIL + bcolors.BOLD + "An error occurred!" + bcolors.ENDC)
+
             # If user chose 'Ordering by Market Value' option in 'Fara-Bourse'.
             if user_input_fara_bourse == 2:
                 bourse_obj.get_stock_exchange_data(fara_bourse_urls[1])
@@ -295,6 +321,7 @@ def running():
                     bourse_obj.symbol_list, bourse_obj.final_price_list, bourse_obj.trade_price_list, bourse_obj.trade_value_list, bourse_obj.trade_volume_list, bourse_obj.marketcap_list = [], [], [], [], [], []
                 else:
                     print(bcolors.FAIL + bcolors.BOLD + "An error occurred!" + bcolors.ENDC)
+
             # If user chose 'Ordering by Final Price' option in 'Fara-Bourse'.
             if user_input_fara_bourse == 3:
                 bourse_obj.get_stock_exchange_data(fara_bourse_urls[2])
@@ -303,6 +330,7 @@ def running():
                     bourse_obj.symbol_list, bourse_obj.final_price_list, bourse_obj.trade_price_list, bourse_obj.trade_value_list, bourse_obj.trade_volume_list, bourse_obj.marketcap_list = [], [], [], [], [], []
                 else:
                     print(bcolors.FAIL + bcolors.BOLD + "An error occurred!" + bcolors.ENDC)
+
             # If user chose 'Ordering by Final Trade' option in 'Fara-Bourse'.
             if user_input_fara_bourse == 4:
                 bourse_obj.get_stock_exchange_data(fara_bourse_urls[3])
@@ -311,6 +339,7 @@ def running():
                     bourse_obj.symbol_list, bourse_obj.final_price_list, bourse_obj.trade_price_list, bourse_obj.trade_value_list, bourse_obj.trade_volume_list, bourse_obj.marketcap_list = [], [], [], [], [], []
                 else:
                     print(bcolors.FAIL + bcolors.BOLD + "An error occurred!" + bcolors.ENDC)
+
             # If user chose 'Ordering by Trade Volume' option in 'Fara-Bourse'.
             if user_input_fara_bourse == 5:
                 bourse_obj.get_stock_exchange_data(fara_bourse_urls[4])
@@ -319,6 +348,7 @@ def running():
                     bourse_obj.symbol_list, bourse_obj.final_price_list, bourse_obj.trade_price_list, bourse_obj.trade_value_list, bourse_obj.trade_volume_list, bourse_obj.marketcap_list = [], [], [], [], [], []
                 else:
                     print(bcolors.FAIL + bcolors.BOLD + "An error occurred!" + bcolors.ENDC)
+
             # If user chose 'Ordering by Trade Value' option in 'Fara-Bourse'.
             if user_input_fara_bourse == 6:
                 bourse_obj.get_stock_exchange_data(fara_bourse_urls[5])
@@ -352,11 +382,13 @@ def running():
                 if user_input3 == 0:
                     print(bcolors.WARNING + "GOODBYE." + bcolors.ENDC)
                     run = False
+                # If user choice is not an available index number between options.
                 if user_input3 > 5:
                     print(
                         bcolors.FAIL + "Please Either choose number 1, 2 or 3 You can also choose '0' to exit or"
                                        " type 3 in order to go back through menu" + bcolors.ENDC)
                     continue
+                # If user choice is not an available index number between options.
                 if user_input3 < 0:
                     print(
                         bcolors.FAIL + "Please Either choose number 1, 2 or 3 You can also choose '0' to exit or"
@@ -375,6 +407,7 @@ def running():
                 crypto_obj.symbol_list, crypto_obj.dollar_price_list, crypto_obj.rial_price_list, crypto_obj.trade_volume_list, crypto_obj.marketcap_list = [], [], [], [], []
             else:
                 print(bcolors.FAIL + bcolors.BOLD + "An error occurred!" + bcolors.ENDC)
+
         # If user chose 'First 100 Crypto Currencies ' option.
         if user_input3 == 2:
             crypto_obj.get_crypto_currency(2)
@@ -383,6 +416,7 @@ def running():
                 crypto_obj.symbol_list, crypto_obj.dollar_price_list, crypto_obj.rial_price_list, crypto_obj.trade_volume_list, crypto_obj.marketcap_list = [], [], [], [], []
             else:
                 print(bcolors.FAIL + bcolors.BOLD + "An error occurred!" + bcolors.ENDC)
+
         # If user chose 'First 500 Crypto Currencies ' option.
         if user_input3 == 3:
             crypto_obj.get_crypto_currency(10)
@@ -391,6 +425,7 @@ def running():
                 crypto_obj.symbol_list, crypto_obj.dollar_price_list, crypto_obj.rial_price_list, crypto_obj.trade_volume_list, crypto_obj.marketcap_list = [], [], [], [], []
             else:
                 print(bcolors.FAIL + bcolors.BOLD + "An error occurred!" + bcolors.ENDC)
+
         # If user chose 'First 1000 Crypto Currencies ' option.
         if user_input3 == 4:
             crypto_obj.get_crypto_currency(20)
@@ -401,6 +436,6 @@ def running():
                 print(bcolors.FAIL + bcolors.BOLD + "An error occurred!" + bcolors.ENDC)
 
 
-# Calling last function in a while loop.
+# Calling function in a while loop.
 while run:
     running()

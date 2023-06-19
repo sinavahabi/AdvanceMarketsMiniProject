@@ -1,8 +1,11 @@
-# Installing essential libraries and packages which can be run in your terminal, virtual env, etc.:
-# Commands:
-# pip install bs4
-# pip install requests
-# pip install jdatetime
+"""
+    Installing essential libraries and packages which can be run in your terminal, virtual env, etc.:
+    Commands:
+        pip install bs4
+        pip install requests
+        pip install jdatetime
+"""
+
 import requests
 from bs4 import BeautifulSoup
 from ColorsClass.colors import bcolors
@@ -31,6 +34,7 @@ class Crypto:
         date = str(current_time)
         for num in numbers:
             try:
+                # Handle if requests response status code is not OK.
                 response = requests.get(url + pages_list[num])
                 if response.status_code == 200:
                     soup = BeautifulSoup(response.text, "html.parser")
@@ -87,7 +91,7 @@ class Crypto:
                             # Creating target lists ("rial_price_list") for inserting our data to mysql database.
                         for v in volume:
                             self.trade_volume_list.append(v.text)
-
+                # If requests response receives an error "req_error" value will change to False and database module methods won't be called and ran.
                 else:
                     print(bcolors.WARNING + "Request error:", str(response.status_code) + bcolors.ENDC)
                     self.req_error = False

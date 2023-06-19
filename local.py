@@ -1,8 +1,11 @@
-# Installing essential libraries and packages which can be run in your terminal, virtual env, etc.:
-# Commands:
-# pip install bs4
-# pip install requests
-# pip install jdatetime
+"""
+    Installing essential libraries and packages which can be run in your terminal, virtual env, etc.:
+    Commands:
+        pip install bs4
+        pip install requests
+        pip install jdatetime
+"""
+
 import requests
 from bs4 import BeautifulSoup
 import jdatetime
@@ -24,6 +27,7 @@ class Local:
         date = str(current_time)
         # Gold and Silver data.
         try:
+            # Handle if requests response status code is not OK.
             response = requests.get("https://www.tgju.org/gold-chart")
             if response.status_code == 200:
                 soup = BeautifulSoup(response.text, 'html.parser')
@@ -80,6 +84,7 @@ class Local:
 
                     for p in silver_prices[0]:
                         self.price_list.append(p.text + " ریال")
+            # If requests response receives an error "req_error" value will change to False and database module methods won't be called and ran.
             else:
                 print(bcolors.WARNING + "Request error:", str(response.status_code) + bcolors.ENDC)
                 self.req_error = False
@@ -93,6 +98,7 @@ class Local:
         date = str(current_time)
         # International ounces.
         try:
+            # Handle if requests response status code is not OK.
             response = requests.get("https://www.tgju.org/gold-global")
             if response.status_code == 200:
                 soup = BeautifulSoup(response.text, 'html.parser')
@@ -118,7 +124,7 @@ class Local:
 
                     for p in prices[0]:
                         self.price_list.append(p.text + " ریال")
-
+            # If requests response receives an error "req_error" value will change to False and database module methods won't be called and ran.
             else:
                 print(bcolors.WARNING + "Request error:", str(response.status_code) + bcolors.ENDC)
                 self.req_error = False
@@ -132,6 +138,7 @@ class Local:
         date = str(current_time)
         # Gold coins.
         try:
+            # Handle if requests response status code is not OK.
             response = requests.get("https://www.tgju.org/coin")
             if response.status_code == 200:
                 soup = BeautifulSoup(response.text, 'html.parser')
@@ -178,7 +185,7 @@ class Local:
 
                     for p2 in prices2[0]:
                         self.price_list.append(p2.text + " ریال")
-
+            # If requests response receives an error "req_error" value will change to False and database module methods won't be called and ran.
             else:
                 print(bcolors.WARNING + "Request error:", str(response.status_code) + bcolors.ENDC)
                 self.req_error = False
@@ -192,6 +199,7 @@ class Local:
         date = str(current_time)
         # All main currencies for different countries.
         try:
+            # Handle if requests response status code is not OK.
             response = requests.get("https://www.tgju.org/currency")
             if response.status_code == 200:
                 soup = BeautifulSoup(response.text, 'html.parser')
@@ -240,7 +248,7 @@ class Local:
 
                     for p2 in prices2[0]:
                         self.currency_price_list.append(p2.text + " ریال")
-
+            # If requests response receives an error "req_error" value will change to False and database module methods won't be called and ran.
             else:
                 print(bcolors.WARNING + "Request error:", str(response.status_code) + bcolors.ENDC)
                 self.req_error = False

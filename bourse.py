@@ -1,8 +1,11 @@
-# Installing essential libraries and packages which can be run in your terminal, virtual env, etc.:
-# Commands:
-# pip install bs4
-# pip install requests
-# pip install jdatetime
+"""
+    Installing essential libraries and packages which can be run in your terminal, virtual env, etc.:
+    Commands:
+        pip install bs4
+        pip install requests
+        pip install jdatetime
+"""
+
 import re
 import requests
 from bs4 import BeautifulSoup
@@ -24,6 +27,7 @@ class Bourse:
         date = str(current_time)
         # This is where we make our method responsive with user interacts.
         try:
+            # Handle if requests response status code is not OK.
             response = requests.get(url)
             if response.status_code == 200:
                 soup = BeautifulSoup(response.text, 'html.parser')
@@ -94,7 +98,7 @@ class Bourse:
                     for m in market_value:
                         market_value_amount = re.sub(r'\s', '', m.text)
                         self.marketcap_list.append(market_value_amount + " ریال")
-
+            # If requests response receives an error "req_error" value will change to False and database module methods won't be called and ran.
             else:
                 print(bcolors.WARNING + "Request error:", str(response.status_code) + bcolors.ENDC)
                 self.req_error = False
@@ -106,6 +110,7 @@ class Bourse:
         current_time = jdatetime.datetime.now()
         date = str(current_time)
         try:
+            # Handle if requests response status code is not OK.
             response = requests.get("https://www.shakhesban.com/markets/index")
             if response.status_code == 200:
                 soup = BeautifulSoup(response.text, 'html.parser')
@@ -137,7 +142,7 @@ class Bourse:
                         amounts_unit = a.next_element.next_element.text
                         amounts_unit_outputs = re.sub(r'\s', '', amounts_unit)
                         self.index_amount_list.append(amounts_outputs + amounts_unit_outputs)
-
+            # If requests response receives an error "req_error" value will change to False and database module methods won't be called and ran.
             else:
                 print(bcolors.WARNING + "Request error:", str(response.status_code) + bcolors.ENDC)
                 self.req_error = False
