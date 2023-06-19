@@ -22,6 +22,7 @@ pages_list = [
 class Crypto:
     def __init__(self):
         self.symbol_list, self.dollar_price_list, self.rial_price_list, self.marketcap_list, self.trade_volume_list = [], [], [], [], []
+        self.req_error = True
 
     def get_crypto_currency(self, value=1):
         numbers = range(0, value)
@@ -29,58 +30,67 @@ class Crypto:
         current_time = jdatetime.datetime.now()
         date = str(current_time)
         for num in numbers:
-            response = requests.get(url + pages_list[num])
-            soup = BeautifulSoup(response.text, "html.parser")
-            table = soup.find('table')
-            thead = table.find('thead')
-            dollar_price_title = thead.find('th', {'class': 'arz-coin-table__price-th'})
-            rial_price_title = thead.find('th', {'class': 'arz-coin-table__rial-price-th'})
-            market_cap_title = thead.find('th', {'class': 'arz-coin-table__marketcap-th'})
-            volume_title = thead.find('th', {'class': 'arz-coin-table__volume-th'})
-            tbody = table.find('tbody')
-            rows = tbody.find_all('tr')
-            for r in rows:
-                counts = r.find_all('td', {'class': 'arz-coin-table__number-td'})
-                names = r.find_all('td', {'class': 'arz-coin-table__name-td'})
-                dollar_prices = r.find_all('td', {'class': 'arz-coin-table__price-td'})
-                rial_prices = r.find_all('td', {'class': 'arz-coin-table__rial-price-td'})
-                market_cap = r.find_all('td', {'class': 'arz-coin-table__marketcap-td'})
-                volume = r.find_all('td', {'class': 'arz-coin-table__volume-td'})
-                # Numbers.
-                for c in counts:
-                    print(bcolors.HEADER + bcolors.BOLD + c.text, end="-" + bcolors.ENDC)
-                # Names.
-                for n in names:
-                    names_span = n.find_all('span')
-                    for ns in names_span:
-                        print(bcolors.HEADER + bcolors.BOLD + ns.text, end=" --> " + bcolors.ENDC)
-                    # Creating target lists ("symbol_list") for inserting our data to mysql database.
-                    for ns in names_span:
-                        self.symbol_list.append(ns.text)
-                # Dollar prices.
-                for dp in dollar_prices:
-                    print(bcolors.OKBLUE + dollar_price_title.text + ": " + dp.text, end=" | " + bcolors.ENDC)
-                # Creating target lists ("dollar_price_list") for inserting our data to mysql database.
-                for dp in dollar_prices:
-                    self.dollar_price_list.append(dp.text)
-                # Rial prices.
-                for rp in rial_prices:
-                    prices_span = rp.find_all('span')
-                    for ps in prices_span[1]:
-                        print(bcolors.FAIL + rial_price_title.text + ": " + ps.text + " تومان", end=" | " + bcolors.ENDC)
-                    # Creating target lists ("rial_price_list") for inserting our data to mysql database.
-                    for ps in prices_span[1]:
-                        self.rial_price_list.append(ps.text + " ریال")
-                # Market cap.
-                for m in market_cap:
-                    print(bcolors.OKGREEN + market_cap_title.text + ": " + m.text, end=" | " + bcolors.ENDC)
-                # Creating target lists ("rial_price_list") for inserting our data to mysql database.
-                for m in market_cap:
-                    self.marketcap_list.append(m.text)
-                # Daily trading volume.
-                for v in volume:
-                    print(bcolors.OKGREEN + volume_title.text + ": " + v.text + "\n" + bcolors.ENDC +
-                          " |" + ' تاریخ:' + date[:16])
-                    # Creating target lists ("rial_price_list") for inserting our data to mysql database.
-                for v in volume:
-                    self.trade_volume_list.append(v.text)
+            try:
+                response = requests.get(url + pages_list[num])
+                if response.status_code == 200:
+                    soup = BeautifulSoup(response.text, "html.parser")
+                    table = soup.find('table')
+                    thead = table.find('thead')
+                    dollar_price_title = thead.find('th', {'class': 'arz-coin-table__price-th'})
+                    rial_price_title = thead.find('th', {'class': 'arz-coin-table__rial-price-th'})
+                    market_cap_title = thead.find('th', {'class': 'arz-coin-table__marketcap-th'})
+                    volume_title = thead.find('th', {'class': 'arz-coin-table__volume-th'})
+                    tbody = table.find('tbody')
+                    rows = tbody.find_all('tr')
+                    for r in rows:
+                        counts = r.find_all('td', {'class': 'arz-coin-table__number-td'})
+                        names = r.find_all('td', {'class': 'arz-coin-table__name-td'})
+                        dollar_prices = r.find_all('td', {'class': 'arz-coin-table__price-td'})
+                        rial_prices = r.find_all('td', {'class': 'arz-coin-table__rial-price-td'})
+                        market_cap = r.find_all('td', {'class': 'arz-coin-table__marketcap-td'})
+                        volume = r.find_all('td', {'class': 'arz-coin-table__volume-td'})
+                        # Numbers.
+                        for c in counts:
+                            print(bcolors.HEADER + bcolors.BOLD + c.text, end="-" + bcolors.ENDC)
+                        # Names.
+                        for n in names:
+                            names_span = n.find_all('span')
+                            for ns in names_span:
+                                print(bcolors.HEADER + bcolors.BOLD + ns.text, end=" --> " + bcolors.ENDC)
+                            # Creating target lists ("symbol_list") for inserting our data to mysql database.
+                            for ns in names_span:
+                                self.symbol_list.append(ns.text)
+                        # Dollar prices.
+                        for dp in dollar_prices:
+                            print(bcolors.OKBLUE + dollar_price_title.text + ": " + dp.text, end=" | " + bcolors.ENDC)
+                        # Creating target lists ("dollar_price_list") for inserting our data to mysql database.
+                        for dp in dollar_prices:
+                            self.dollar_price_list.append(dp.text)
+                        # Rial prices.
+                        for rp in rial_prices:
+                            prices_span = rp.find_all('span')
+                            for ps in prices_span[1]:
+                                print(bcolors.FAIL + rial_price_title.text + ": " + ps.text + " تومان", end=" | " + bcolors.ENDC)
+                            # Creating target lists ("rial_price_list") for inserting our data to mysql database.
+                            for ps in prices_span[1]:
+                                self.rial_price_list.append(ps.text + " ریال")
+                        # Market cap.
+                        for m in market_cap:
+                            print(bcolors.OKGREEN + market_cap_title.text + ": " + m.text, end=" | " + bcolors.ENDC)
+                        # Creating target lists ("rial_price_list") for inserting our data to mysql database.
+                        for m in market_cap:
+                            self.marketcap_list.append(m.text)
+                        # Daily trading volume.
+                        for v in volume:
+                            print(bcolors.OKGREEN + volume_title.text + ": " + v.text + "\n" + bcolors.ENDC +
+                                  " |" + ' تاریخ:' + date[:16])
+                            # Creating target lists ("rial_price_list") for inserting our data to mysql database.
+                        for v in volume:
+                            self.trade_volume_list.append(v.text)
+
+                else:
+                    print(bcolors.WARNING + "Request error:", str(response.status_code) + bcolors.ENDC)
+                    self.req_error = False
+
+            except requests.exceptions.RequestException as Error:
+                pass

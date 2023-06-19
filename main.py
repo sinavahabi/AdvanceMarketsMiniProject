@@ -115,24 +115,35 @@ def running():
         # If user chose 'Gold and Silver price' option.
         if user_input1 == 1:
             local_obj.get_data()
-            local_obj.data_database()
-            local_obj.symbol_list, local_obj.price_list = [], []
+            if local_obj.req_error:
+                local_obj.data_database()
+                local_obj.symbol_list, local_obj.price_list = [], []
+            else:
+                print(bcolors.FAIL + bcolors.BOLD + "An error occurred!" + bcolors.ENDC)
         # If user chose 'International Ounces price' option.
         if user_input1 == 2:
             local_obj.get_ounce()
-            local_obj.data_database()
-            local_obj.symbol_list, local_obj.price_list = [], []
+            if local_obj.req_error:
+                local_obj.data_database()
+                local_obj.symbol_list, local_obj.price_list = [], []
+            else:
+                print(bcolors.FAIL + bcolors.BOLD + "An error occurred!" + bcolors.ENDC)
         # If user chose 'Gold Coin price' option.
         if user_input1 == 3:
             local_obj.get_gold_coin()
-            local_obj.data_database()
-            local_obj.symbol_list, local_obj.price_list = [], []
+            if local_obj.req_error:
+                local_obj.data_database()
+                local_obj.symbol_list, local_obj.price_list = [], []
+            else:
+                print(bcolors.FAIL + bcolors.BOLD + "An error occurred!" + bcolors.ENDC)
         # If user chose 'International Currencies price' option.
         if user_input1 == 4:
             local_obj.get_currencies()
-            local_obj.currencies_database()
-            local_obj.currency_symbol_list, local_obj.currency_price_list = [], []
-
+            if local_obj.req_error:
+                local_obj.currencies_database()
+                local_obj.currency_symbol_list, local_obj.currency_price_list = [], []
+            else:
+                print(bcolors.FAIL + bcolors.BOLD + "An error occurred!" + bcolors.ENDC)
     # If user chose Tehran Stock Exchange market option.
     if user_input == 2:
         print(bcolors.OKBLUE + bcolors.BOLD + "1: Bourse." + bcolors.ENDC)
@@ -192,33 +203,51 @@ def running():
             # If user chose 'Without Ordering' option in 'Bourse'.
             if user_input_bourse == 1:
                 bourse_obj.get_stock_exchange_data(bourse_urls[0])
-                bourse_obj.database_bourse()
-                bourse_obj.symbol_list, bourse_obj.final_price_list, bourse_obj.trade_price_list, bourse_obj.trade_value_list, bourse_obj.trade_volume_list, bourse_obj.marketcap_list = [], [], [], [], [], []
+                if bourse_obj.req_error:
+                    bourse_obj.database_bourse()
+                    bourse_obj.symbol_list, bourse_obj.final_price_list, bourse_obj.trade_price_list, bourse_obj.trade_value_list, bourse_obj.trade_volume_list, bourse_obj.marketcap_list = [], [], [], [], [], []
+                else:
+                    print(bcolors.FAIL + bcolors.BOLD + "An error occurred!" + bcolors.ENDC)
             # If user chose 'Ordering by Market Value' option in 'Bourse'.
             if user_input_bourse == 2:
                 bourse_obj.get_stock_exchange_data(bourse_urls[1])
-                bourse_obj.database_bourse()
-                bourse_obj.symbol_list, bourse_obj.final_price_list, bourse_obj.trade_price_list, bourse_obj.trade_value_list, bourse_obj.trade_volume_list, bourse_obj.marketcap_list = [], [], [], [], [], []
+                if bourse_obj.req_error:
+                    bourse_obj.database_bourse()
+                    bourse_obj.symbol_list, bourse_obj.final_price_list, bourse_obj.trade_price_list, bourse_obj.trade_value_list, bourse_obj.trade_volume_list, bourse_obj.marketcap_list = [], [], [], [], [], []
+                else:
+                    print(bcolors.FAIL + bcolors.BOLD + "An error occurred!" + bcolors.ENDC)
             # If user chose 'Ordering by Final Price' option in 'Bourse'.
             if user_input_bourse == 3:
                 bourse_obj.get_stock_exchange_data(bourse_urls[2])
-                bourse_obj.database_bourse()
-                bourse_obj.symbol_list, bourse_obj.final_price_list, bourse_obj.trade_price_list, bourse_obj.trade_value_list, bourse_obj.trade_volume_list, bourse_obj.marketcap_list = [], [], [], [], [], []
+                if bourse_obj.req_error:
+                    bourse_obj.database_bourse()
+                    bourse_obj.symbol_list, bourse_obj.final_price_list, bourse_obj.trade_price_list, bourse_obj.trade_value_list, bourse_obj.trade_volume_list, bourse_obj.marketcap_list = [], [], [], [], [], []
+                else:
+                    print(bcolors.FAIL + bcolors.BOLD + "An error occurred!" + bcolors.ENDC)
             # If user chose 'Ordering by Final Trade' option in 'Bourse'.
             if user_input_bourse == 4:
                 bourse_obj.get_stock_exchange_data(bourse_urls[3])
-                bourse_obj.database_bourse()
-                bourse_obj.symbol_list, bourse_obj.final_price_list, bourse_obj.trade_price_list, bourse_obj.trade_value_list, bourse_obj.trade_volume_list, bourse_obj.marketcap_list = [], [], [], [], [], []
+                if bourse_obj.req_error:
+                    bourse_obj.database_bourse()
+                    bourse_obj.symbol_list, bourse_obj.final_price_list, bourse_obj.trade_price_list, bourse_obj.trade_value_list, bourse_obj.trade_volume_list, bourse_obj.marketcap_list = [], [], [], [], [], []
+                else:
+                    print(bcolors.FAIL + bcolors.BOLD + "An error occurred!" + bcolors.ENDC)
             # If user chose 'Ordering by Trade Volume' option in 'Bourse'.
             if user_input_bourse == 5:
                 bourse_obj.get_stock_exchange_data(bourse_urls[4])
-                bourse_obj.database_bourse()
-                bourse_obj.symbol_list, bourse_obj.final_price_list, bourse_obj.trade_price_list, bourse_obj.trade_value_list, bourse_obj.trade_volume_list, bourse_obj.marketcap_list = [], [], [], [], [], []
+                if bourse_obj.req_error:
+                    bourse_obj.database_bourse()
+                    bourse_obj.symbol_list, bourse_obj.final_price_list, bourse_obj.trade_price_list, bourse_obj.trade_value_list, bourse_obj.trade_volume_list, bourse_obj.marketcap_list = [], [], [], [], [], []
+                else:
+                    print(bcolors.FAIL + bcolors.BOLD + "An error occurred!" + bcolors.ENDC)
             # If user chose 'Ordering by Trade Value' option in 'Bourse'.
             if user_input_bourse == 6:
                 bourse_obj.get_stock_exchange_data(bourse_urls[5])
-                bourse_obj.database_bourse()
-                bourse_obj.symbol_list, bourse_obj.final_price_list, bourse_obj.trade_price_list, bourse_obj.trade_value_list, bourse_obj.trade_volume_list, bourse_obj.marketcap_list = [], [], [], [], [], []
+                if bourse_obj.req_error:
+                    bourse_obj.database_bourse()
+                    bourse_obj.symbol_list, bourse_obj.final_price_list, bourse_obj.trade_price_list, bourse_obj.trade_value_list, bourse_obj.trade_volume_list, bourse_obj.marketcap_list = [], [], [], [], [], []
+                else:
+                    print(bcolors.FAIL + bcolors.BOLD + "An error occurred!" + bcolors.ENDC)
 
         # If user chose 'Fara-Bourse' option.
         if user_input2 == 2:
@@ -253,39 +282,60 @@ def running():
             # If user chose 'Without Ordering' option in 'Fara-Bourse'.
             if user_input_fara_bourse == 1:
                 bourse_obj.get_stock_exchange_data(fara_bourse_urls[0])
-                bourse_obj.database_bourse()
-                bourse_obj.symbol_list, bourse_obj.final_price_list, bourse_obj.trade_price_list, bourse_obj.trade_value_list, bourse_obj.trade_volume_list, bourse_obj.marketcap_list = [], [], [], [], [], []
+                if bourse_obj.req_error:
+                    bourse_obj.database_bourse()
+                    bourse_obj.symbol_list, bourse_obj.final_price_list, bourse_obj.trade_price_list, bourse_obj.trade_value_list, bourse_obj.trade_volume_list, bourse_obj.marketcap_list = [], [], [], [], [], []
+                else:
+                    print(bcolors.FAIL + bcolors.BOLD + "An error occurred!" + bcolors.ENDC)
             # If user chose 'Ordering by Market Value' option in 'Fara-Bourse'.
             if user_input_fara_bourse == 2:
                 bourse_obj.get_stock_exchange_data(fara_bourse_urls[1])
-                bourse_obj.database_bourse()
-                bourse_obj.symbol_list, bourse_obj.final_price_list, bourse_obj.trade_price_list, bourse_obj.trade_value_list, bourse_obj.trade_volume_list, bourse_obj.marketcap_list = [], [], [], [], [], []
+                if bourse_obj.req_error:
+                    bourse_obj.database_bourse()
+                    bourse_obj.symbol_list, bourse_obj.final_price_list, bourse_obj.trade_price_list, bourse_obj.trade_value_list, bourse_obj.trade_volume_list, bourse_obj.marketcap_list = [], [], [], [], [], []
+                else:
+                    print(bcolors.FAIL + bcolors.BOLD + "An error occurred!" + bcolors.ENDC)
             # If user chose 'Ordering by Final Price' option in 'Fara-Bourse'.
             if user_input_fara_bourse == 3:
                 bourse_obj.get_stock_exchange_data(fara_bourse_urls[2])
-                bourse_obj.database_bourse()
-                bourse_obj.symbol_list, bourse_obj.final_price_list, bourse_obj.trade_price_list, bourse_obj.trade_value_list, bourse_obj.trade_volume_list, bourse_obj.marketcap_list = [], [], [], [], [], []
+                if bourse_obj.req_error:
+                    bourse_obj.database_bourse()
+                    bourse_obj.symbol_list, bourse_obj.final_price_list, bourse_obj.trade_price_list, bourse_obj.trade_value_list, bourse_obj.trade_volume_list, bourse_obj.marketcap_list = [], [], [], [], [], []
+                else:
+                    print(bcolors.FAIL + bcolors.BOLD + "An error occurred!" + bcolors.ENDC)
             # If user chose 'Ordering by Final Trade' option in 'Fara-Bourse'.
             if user_input_fara_bourse == 4:
                 bourse_obj.get_stock_exchange_data(fara_bourse_urls[3])
-                bourse_obj.database_bourse()
-                bourse_obj.symbol_list, bourse_obj.final_price_list, bourse_obj.trade_price_list, bourse_obj.trade_value_list, bourse_obj.trade_volume_list, bourse_obj.marketcap_list = [], [], [], [], [], []
+                if bourse_obj.req_error:
+                    bourse_obj.database_bourse()
+                    bourse_obj.symbol_list, bourse_obj.final_price_list, bourse_obj.trade_price_list, bourse_obj.trade_value_list, bourse_obj.trade_volume_list, bourse_obj.marketcap_list = [], [], [], [], [], []
+                else:
+                    print(bcolors.FAIL + bcolors.BOLD + "An error occurred!" + bcolors.ENDC)
             # If user chose 'Ordering by Trade Volume' option in 'Fara-Bourse'.
             if user_input_fara_bourse == 5:
                 bourse_obj.get_stock_exchange_data(fara_bourse_urls[4])
-                bourse_obj.database_bourse()
-                bourse_obj.symbol_list, bourse_obj.final_price_list, bourse_obj.trade_price_list, bourse_obj.trade_value_list, bourse_obj.trade_volume_list, bourse_obj.marketcap_list = [], [], [], [], [], []
+                if bourse_obj.req_error:
+                    bourse_obj.database_bourse()
+                    bourse_obj.symbol_list, bourse_obj.final_price_list, bourse_obj.trade_price_list, bourse_obj.trade_value_list, bourse_obj.trade_volume_list, bourse_obj.marketcap_list = [], [], [], [], [], []
+                else:
+                    print(bcolors.FAIL + bcolors.BOLD + "An error occurred!" + bcolors.ENDC)
             # If user chose 'Ordering by Trade Value' option in 'Fara-Bourse'.
             if user_input_fara_bourse == 6:
                 bourse_obj.get_stock_exchange_data(fara_bourse_urls[5])
-                bourse_obj.database_bourse()
-                bourse_obj.symbol_list, bourse_obj.final_price_list, bourse_obj.trade_price_list, bourse_obj.trade_value_list, bourse_obj.trade_volume_list, bourse_obj.marketcap_list = [], [], [], [], [], []
+                if bourse_obj.req_error:
+                    bourse_obj.database_bourse()
+                    bourse_obj.symbol_list, bourse_obj.final_price_list, bourse_obj.trade_price_list, bourse_obj.trade_value_list, bourse_obj.trade_volume_list, bourse_obj.marketcap_list = [], [], [], [], [], []
+                else:
+                    print(bcolors.FAIL + bcolors.BOLD + "An error occurred!" + bcolors.ENDC)
 
         # If user chose 'Indexes' option.
         if user_input2 == 3:
             bourse_obj.get_indicators()
-            bourse_obj.database_index()
-            bourse_obj.index_symbol_list, bourse_obj.index_amount_list = [], []
+            if bourse_obj.req_error:
+                bourse_obj.database_index()
+                bourse_obj.index_symbol_list, bourse_obj.index_amount_list = [], []
+            else:
+                print(bcolors.FAIL + bcolors.BOLD + "An error occurred!" + bcolors.ENDC)
 
     # If user chose Crypto Currency market option.
     if user_input == 3:
@@ -320,23 +370,35 @@ def running():
         # If user chose 'First 50 top Crypto Currencies' option.
         if user_input3 == 1:
             crypto_obj.get_crypto_currency(1)
-            crypto_obj.database()
-            crypto_obj.symbol_list, crypto_obj.dollar_price_list, crypto_obj.rial_price_list, crypto_obj.trade_volume_list, crypto_obj.marketcap_list = [], [], [], [], []
+            if crypto_obj.req_error:
+                crypto_obj.database()
+                crypto_obj.symbol_list, crypto_obj.dollar_price_list, crypto_obj.rial_price_list, crypto_obj.trade_volume_list, crypto_obj.marketcap_list = [], [], [], [], []
+            else:
+                print(bcolors.FAIL + bcolors.BOLD + "An error occurred!" + bcolors.ENDC)
         # If user chose 'First 100 Crypto Currencies ' option.
         if user_input3 == 2:
             crypto_obj.get_crypto_currency(2)
-            crypto_obj.database()
-            crypto_obj.symbol_list, crypto_obj.dollar_price_list, crypto_obj.rial_price_list, crypto_obj.trade_volume_list, crypto_obj.marketcap_list = [], [], [], [], []
+            if crypto_obj.req_error:
+                crypto_obj.database()
+                crypto_obj.symbol_list, crypto_obj.dollar_price_list, crypto_obj.rial_price_list, crypto_obj.trade_volume_list, crypto_obj.marketcap_list = [], [], [], [], []
+            else:
+                print(bcolors.FAIL + bcolors.BOLD + "An error occurred!" + bcolors.ENDC)
         # If user chose 'First 500 Crypto Currencies ' option.
         if user_input3 == 3:
             crypto_obj.get_crypto_currency(10)
-            crypto_obj.database()
-            crypto_obj.symbol_list, crypto_obj.dollar_price_list, crypto_obj.rial_price_list, crypto_obj.trade_volume_list, crypto_obj.marketcap_list = [], [], [], [], []
+            if crypto_obj.req_error:
+                crypto_obj.database()
+                crypto_obj.symbol_list, crypto_obj.dollar_price_list, crypto_obj.rial_price_list, crypto_obj.trade_volume_list, crypto_obj.marketcap_list = [], [], [], [], []
+            else:
+                print(bcolors.FAIL + bcolors.BOLD + "An error occurred!" + bcolors.ENDC)
         # If user chose 'First 1000 Crypto Currencies ' option.
         if user_input3 == 4:
             crypto_obj.get_crypto_currency(20)
-            crypto_obj.database()
-            crypto_obj.symbol_list, crypto_obj.dollar_price_list, crypto_obj.rial_price_list, crypto_obj.trade_volume_list, crypto_obj.marketcap_list = [], [], [], [], []
+            if crypto_obj.req_error:
+                crypto_obj.database()
+                crypto_obj.symbol_list, crypto_obj.dollar_price_list, crypto_obj.rial_price_list, crypto_obj.trade_volume_list, crypto_obj.marketcap_list = [], [], [], [], []
+            else:
+                print(bcolors.FAIL + bcolors.BOLD + "An error occurred!" + bcolors.ENDC)
 
 
 # Calling last function in a while loop.
