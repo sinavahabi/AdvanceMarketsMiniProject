@@ -1,10 +1,10 @@
 Advance Market Status
 
-Websites links: “https://www.tgju.org”, “https://www.shakhesban.com”, “https://arzdigital.com/coins”
-
-Features: OOP, Continuous program, Error Handling, Interactive, MySQL (MariaDB), REST API, User selection based, Regex, Python virtual environment 
-
 Languages: Python
+
+Topics: OOP, Continuous program, Error handling, Interactive, MySQL, MariaDB, REST API, Optional, Regex, Python virtual environment 
+
+Websites links: “https://www.tgju.org”, “https://www.shakhesban.com”, “https://arzdigital.com/coins”
 
 In this program there’s two main purposes:
 1-Web scraping and showing useful market data read from different websites around the world.
